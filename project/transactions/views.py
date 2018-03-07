@@ -8,7 +8,7 @@ transactions_blueprint = Blueprint('transactions', __name__)
 @transactions_blueprint.route('', methods=["POST"])
 @login_required
 def create():
-    amount = min(current_user.amount, int(request.form['amount']))
+    amount = min(current_user.coins, int(request.form['amount']))
     recipient = User.query.filter_by(email = request.form['email']).first()
     if recipient and amount > 0:
         new_transaction = Transaction(current_user.id,

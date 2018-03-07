@@ -24,3 +24,7 @@ body {
   border-radius: 8px;
   padding: 3rem;
 }
+
+#transaction-form > input {
+  flex: 1;
+}

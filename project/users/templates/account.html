@@ -1,4 +1,28 @@
 {% extends 'base.html' %} {% block content %}
-<h1>My account</h1>
-<a href={{url_for( "users.logout" )}}>Log out</a>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+          {{ current_user.name }}'s Account
+          <a href={{url_for( "users.logout" )}}>Log out</a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">E-mail: {{ current_user.email }}</h5>
+          <h5 class="card-title">Coin Balance: ${{ current_user.coins }}</h5>
+          <h5 class="card-title">Transactions: {{ current_user.transactions|length }}</h5>
+        </div>
+        <div class="card-body">
+          <h1>Transfer Coins</h1>
+          <form class="form-inline" id="transaction-form" action={{url_for( 'transactions.create' )}} method="POST">
+            <input type="text" class="form-control mb-2 mr-sm-2" name="email" placeholder="Recipient e-mail">
+            <input type="number" class="form-control mb-2 mr-sm-2" name="amount" placeholder="Amount to Transfer" max={{current_user.coins}}>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
