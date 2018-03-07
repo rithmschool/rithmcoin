@@ -1,5 +1,6 @@
 from project import db, bcrypt
 from flask_login import UserMixin
+from datetime import datetime
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -9,6 +10,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.Text, unique=True)
     password = db.Column(db.Text)
     coins = db.Column(db.Integer)
+    transactions = db.relationship('Transaction', 
+                                   primaryjoin="or_(User.id==Transaction.sender_id, "
+                                   "User.id==Transaction.recipient_id)")
 
     def __init__(self, name, email, password):
         self.name = name
@@ -25,3 +29,17 @@ class User(db.Model, UserMixin):
                 return found_user
         return False
 
+class Transaction(db.Model):
+    __tablename__ = 'transactions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column('sender_id',
+                          db.Integer,
+                          db.ForeignKey('users.id'))
+    recipient_id = db.Column('recipient_id',
+                             db.Integer,
+                             db.ForeignKey('users.id'))
+    amount = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    sender = db.relationship('User', foreign_keys=[sender_id])
+    recipient = db.relationship('User', foreign_keys=[recipient_id])
