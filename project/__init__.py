@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -34,4 +34,4 @@ def load_user(id):
 
 @app.route('/')
 def root():
-    return "HELLO WORLD!"
+    return render_template("home.html")

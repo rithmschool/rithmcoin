@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+<div class="cover" style="background-image: url({{url_for('static', filename='images/rithmcoin.jpg')}});">
+  <h1 class="display-1">RithmCoin</h1>
+  <h4 class="display-4">Maximum Disruption, Minimal Hassle</h4>
+  <p>Sign up today for 1000 free RithmCoins!</p>
+  <div>
+    <a role="button" class="btn btn-light btn-lg" href={{url_for( "users.signup")}}>Sign up</a>
+    <a role="button" class="btn btn-secondary btn-lg" href={{url_for( "users.login")}}>Log in</a>
+  </div>
+</div>
+{% endblock %}

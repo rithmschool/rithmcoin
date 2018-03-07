@@ -1,0 +1,16 @@
+.cover {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding-right: 2rem;
+}
+
+.cover > .display-1,
+.cover > .display-4 {
+  text-shadow: 0 0 10px #333;
+}
