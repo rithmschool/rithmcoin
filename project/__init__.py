@@ -21,7 +21,7 @@ login_manager.init_app(app)
 from project.users.views import users_blueprint
 # from project.transactions.views import transactions_blueprint
 
-app.register_blueprint(users_blueprint, url_prefix='/')
+app.register_blueprint(users_blueprint)
 # app.register_blueprint(transactions_blueprint, url_prefix='/transactions')
 
 login_manager.login_view = "users.login"
