@@ -43,3 +43,8 @@ class Transaction(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     sender = db.relationship('User', foreign_keys=[sender_id])
     recipient = db.relationship('User', foreign_keys=[recipient_id])
+
+    def __init__(self, sender_id, recipient_id, amount):
+        self.sender_id = sender_id
+        self.recipient_id = recipient_id
+        self.amount = amount
