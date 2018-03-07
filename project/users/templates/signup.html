@@ -1,3 +1,25 @@
 {% extends 'base.html' %} {% block content %}
-<h1>signup</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6 ml-auto mr-auto mt-5">
+      <form action={{url_for( 'users.signup' )}} method="POST" id="user-form">
+        <h1 class="text-center">Sign up!</h1>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        <a role="button" class="btn btn-link btn-block" href={{url_for( "users.login" )}}>I have an account, go to login</a>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

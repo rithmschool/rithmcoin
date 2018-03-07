@@ -1,3 +1,7 @@
+body {
+  background-color: #1b578a;
+}
+
 .cover {
   width: 100vw;
   height: 100vh;
@@ -13,4 +17,10 @@
 .cover > .display-1,
 .cover > .display-4 {
   text-shadow: 0 0 10px #333;
+}
+
+#user-form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 3rem;
 }
