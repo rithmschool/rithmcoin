@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
         self.name = name
         self.email = email
         self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
-        self.is_admin = is_admin
+        self.is_admin = bool(is_admin)
         self.coins = 1000
 
     @classmethod
