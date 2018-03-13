@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card m-3">
+        <div class="card-header d-flex justify-content-between">
+          {{ current_user.name }}'s Account
+          <div>
+            <a href={{url_for( "users.account" )}}>My Account</a> |
+            <a href={{url_for( "users.logout" )}}>Log out</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <h1>Super Sensitive User Data</h1>
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Coin Balance</th>
+              </tr>
+            </thead>
+            {% for user in users %}
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>${{ user.coins }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

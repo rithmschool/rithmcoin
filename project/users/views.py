@@ -3,8 +3,19 @@ from project.models import User
 from project import db
 from flask_login import login_user, logout_user, current_user, login_required
 from sqlalchemy.exc import IntegrityError
+from functools import wraps
 
 users_blueprint = Blueprint('users', __name__, template_folder='templates')
+
+
+def ensure_admin(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if not current_user.is_admin:
+            return redirect(url_for('root'))
+        return fn(*args, **kwargs)
+
+    return wrapper
 
 
 @users_blueprint.route('/login', methods=["GET", "POST"])
@@ -34,13 +45,20 @@ def signup():
     return render_template("signup.html")
 
 
-@users_blueprint.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('root'))
-
-
 @users_blueprint.route('/account')
 @login_required
 def account():
     return render_template("account.html")
+
+
+@users_blueprint.route('/admin')
+@login_required
+@ensure_admin
+def admin():
+    return render_template("admin.html", users=User.query.all())
+
+
+@users_blueprint.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('root'))

@@ -5,7 +5,11 @@
       <div class="card m-3">
         <div class="card-header d-flex justify-content-between">
           {{ current_user.name }}'s Account
-          <a href={{url_for( "users.logout" )}}>Log out</a>
+          <div>
+            {% if current_user.is_admin %}
+            <a href={{url_for( "users.admin" )}}>Admin Portal</a> | {% endif %}
+            <a href={{url_for( "users.logout" )}}>Log out</a>
+          </div>
         </div>
         <div class="card-body">
           <h5 class="card-title">E-mail: {{ current_user.email }}</h5>
