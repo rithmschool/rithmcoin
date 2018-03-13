@@ -18,7 +18,18 @@ def ensure_admin(fn):
     return wrapper
 
 
+def ensure_logged_out(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if current_user.is_authenticated:
+            return redirect(url_for('users.account'))
+        return fn(*args, **kwargs)
+
+    return wrapper
+
+
 @users_blueprint.route('/login', methods=["GET", "POST"])
+@ensure_logged_out
 def login():
     if request.method == "POST":
         found_user = User.authenticate(request.form['email'],
@@ -31,6 +42,7 @@ def login():
 
 
 @users_blueprint.route('/signup', methods=["GET", "POST"])
+@ensure_logged_out
 def signup():
     if request.method == "POST":
         try:
