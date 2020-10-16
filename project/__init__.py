@@ -3,14 +3,10 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_cors import CORS
 from flask_migrate import Migrate
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-CORS(app)
-
-import os
 
 if os.environ.get('ENV') == 'production':
     app.config.from_object('config.ProductionConfig')
