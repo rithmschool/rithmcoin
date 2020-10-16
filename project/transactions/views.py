@@ -20,4 +20,4 @@ def create():
         db.session.commit()
     else:
         flash("Invalid form data.")
-    return redirect(url_for("users.account"))
+    return redirect(url_for("root"))
